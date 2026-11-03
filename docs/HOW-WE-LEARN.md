@@ -1,7 +1,23 @@
 # How We Learn — The Instructor Model as Operating Rules
 
+## Current preference: guided reading and agent-led implementation
+
+The [AgentOps Instructor](../.github/agents/agentops-instructor.agent.md) defaults to
+linking the lesson, explaining a small reading chunk, then implementing and verifying
+it with available tools. Pause only for manual effort, required approvals, or decisions
+that cannot safely be inferred; do not require approval for every routine local chunk.
+
+Quizzes, baseline diagnostics, retrieval warm-ups, confidence ratings, teach-backs,
+unaided probes, and learner reflections are opt-in, not required. The assessment rules
+below apply when the learner explicitly requests that mode. Technical verification,
+cost and security controls, and honest evidence tracking remain required. Record
+agent-completed work as `assisted`, not `mastered`; unassessed mastery does not block
+guided progression.
+
+## Optional assessment model
+
 Distilled from the pedagogy research behind this course. These rules bind both the
-learner and the AI instructor. They exist because unguarded AI help reliably raises
+learner and the AI instructor when assessment mode is requested. They exist because unguarded AI help reliably raises
 practice performance while *lowering* unaided performance (the crutch effect) — the
 whole model is designed to prevent that failure mode.
 
