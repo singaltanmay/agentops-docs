@@ -14,7 +14,7 @@ Monitoring without a cap is how log costs sneak up ($2.30/GB ingested past the 5
 3. Tag every answer with a confidence (0–100%) *before* checking. Answers + one-line explanations come after all attempts — a miss on a prerequisite for today changes today's plan now, per the opening routine.
 
 ## Prerequisite check
-Re-run Day 1's independent verification ("Toolchain, repo, and the $200 budget") before starting. If it no longer passes, the environment has rotted — repair it first and compress today's objective; do not stack new work on a broken base.
+Re-run Day 1's independent verification ("Toolchain, repo, and the budget") before starting. If it no longer passes, the environment has rotted — repair it first and compress today's objective; do not stack new work on a broken base.
 
 ## Core concept
 **Worked example (parallel):** skim the azure-search-openai-demo repo's `infra/` layout first — env-based SKU parameters, one module per resource. Then write yours: same discipline, your naming, your caps. Do not copy its app resources; you need four resources, it has twenty.

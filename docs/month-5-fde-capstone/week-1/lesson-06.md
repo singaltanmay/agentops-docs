@@ -22,7 +22,11 @@ Week 1 lessons complete; readiness verdicts addressed or accepted in writing.
 Re-run the previous lesson's independent verification (Month 5 Week 1, Lesson 5 (Consolidation — deployment-readiness gate)) before starting. If it no longer passes, repair first and compress today's objective — never stack new work on a broken base.
 
 ## Core concept
-Environment discipline: everything parameterised (corpus, audiences, SLO targets, budget alerts on the new RG inheriting the $ discipline — note: the capstone RG lives inside the same $200 credit universe; its budget line comes from the Month 5 column, and the deployment report states its projected monthly cost explicitly).
+Environment discipline: everything parameterised (corpus, audiences, SLO targets,
+budget alerts on the new RG inheriting the subscription's verified credit
+allowance and project spend discipline — the capstone RG shares the same credit
+universe; its budget line comes from the Month 5 estimate, and the deployment
+report states projected monthly cost explicitly).
 
 ## Build steps
 Expected output is stated *before* you run each step. If you see something else, stop, classify the error (slip / execution-model / API misconception / design misconception), and check the failure notes.

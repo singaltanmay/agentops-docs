@@ -33,7 +33,7 @@ Definitions are scoped to how each term is used in the AgentOps Workbench build.
 - **Cost per successful outcome** — total spend ÷ tasks actually completed correctly. The platform metric that keeps quality, latency, and cost in one frame.
 
 ## Security
-- **OWASP LLM Top 10 (2025)** — the threat taxonomy for Month 4: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM06 Excessive Agency, LLM07 System Prompt Leakage, LLM08 Vector & Embedding Weaknesses (your index is an attack surface), LLM10 Unbounded Consumption (your $200 budget is a security control).
+- **OWASP LLM Top 10 (2025)** — the threat taxonomy for Month 4: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM06 Excessive Agency, LLM07 System Prompt Leakage, LLM08 Vector & Embedding Weaknesses (your index is an attack surface), LLM10 Unbounded Consumption (subscription spending limits, budgets, quotas, and token controls are cost safeguards).
 - **Prompt injection (direct / indirect)** — attacker text instructing the model; indirect injection arrives via retrieved documents or tool outputs — the RAG/agent threat model.
 - **Lethal trifecta** — private data + untrusted content + external communication in one agent = exfiltratable by design. Gates which tools may coexist in one session.
 - **Prompt Shields** — Azure AI Content Safety classifiers for user-prompt attacks and document attacks. A layer, not a fix; architecture is the durable defence.

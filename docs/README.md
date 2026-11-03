@@ -2,8 +2,11 @@
 
 This repo is the **ground truth** for a 6-month, self-taught level-up: from frontend/UI
 engineering into **Agentic AI / Applied AI Engineering**, built around ONE cumulative
-production system — **AgentOps Workbench** — hosted entirely on Azure inside a
-**$200/month credit budget**.
+production system — **AgentOps Workbench** — hosted entirely on Azure, with
+deployment spend kept within the learner's verified subscription credit
+allowance. Original course cost estimates are in USD; this learner's Visual
+Studio offer is billed in INR and showed about INR 12,500 starting credit, so
+verify and adapt the spend plan before creating paid resources.
 
 It is not a syllabus to read. It is a sequence of lessons to *do*, in order, gated by
 evidence. If this repo and anyone's memory disagree about the plan, this repo wins.
@@ -57,6 +60,13 @@ when the evidence says so, not when the calendar does. The full instructor model
 evidence entry has not happened, whatever the checkbox says.
 
 ## Repo map
+
+Course materials live in `docs/`; application code, infrastructure, ingestion,
+evaluations, and data live alongside it in the same repository. Use branches
+for lesson work: Week 1 (including Day 1) uses `month1_week1`, tracking
+`origin/month1_week1`. Do not create a separate workbench repository.
+See the [project README](../README.md) for the root layout. The map below is
+relative to `docs/`.
 
 ```
 README.md                  ← you are here

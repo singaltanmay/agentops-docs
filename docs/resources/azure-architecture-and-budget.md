@@ -54,6 +54,10 @@ nearly free at this scale; fixed tiers are the budget game.
 
 See the month-by-month table in [../ROADMAP.md](../ROADMAP.md)
 (≈$116 / $152 / $165 / $161 / $187 / $174 — all under $200).
+These USD estimates are the original course model, not a guarantee that each
+month fits this subscription's approximately INR 12,500 starting credit. Recheck
+regional pricing and the remaining account balance before enabling paid tiers;
+the active project budget is INR 10,000 and covers only its resource group.
 
 ## Services that would blow the budget (banned)
 
@@ -76,7 +80,10 @@ See the month-by-month table in [../ROADMAP.md](../ROADMAP.md)
 2. **Caps in IaC:** AI Search SKU = Basic, 1 replica / 1 partition; Postgres = B1ms; AOAI TPM quotas low (10–30k) so a runaway loop hits a quota, not your credits.
 3. **Token budgets in code:** max context chunks + `max_tokens` per request; per-day token ceiling with a circuit breaker in the API middleware; stable system-prompt prefix first (cached input is half price); Batch API for offline eval/golden-set runs.
 4. **Free tiers first, deliberately:** AI Search Free (Month 1, weeks 1–2), Content Safety Free, Container Apps free grant, 5 GB Log Analytics included.
-5. **Cost Management budget with teeth:** $200 budget on the resource group, alerts at 50% / 80% / 100% *forecast*; 15-min cost review is a standing weekly task from Month 1.
+5. **Cost Management budget with alerts:** this project uses an INR 10,000
+   calendar-month budget on its resource group, with actual and forecast alerts
+   at 50% / 80% / 100%. The subscription credit limit is separate; keep headroom
+   for existing resources and review actual costs weekly.
 6. **Semantic-ranker discipline:** log semantic vs non-semantic per query so a metered feature can't surprise you.
 7. **One region, LRS, Hot→Cool lifecycle** on Blob trace exports; 31-day log retention.
 8. **Ephemeral experiment rule (Month 5):** any GPU/ML resource gets a name, a dollar envelope, and a deletion command written down *before* it is created.

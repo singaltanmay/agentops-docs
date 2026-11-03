@@ -6,7 +6,10 @@
 Replace the constant step cap with a budget system: max steps, per-task token ceiling, per-tool timeout, and duplicate-call detection — verified by a task engineered to run away being stopped by each control in turn.
 
 ## Why this exists
-An agent without budgets is an unbounded-concurrency billing incident (OWASP LLM10 — and your $200 budget is the tripwire from Month 1 Day 1). These controls are also Month 3's durable-execution foundation.
+An agent without cost controls is an unbounded-concurrency billing incident
+(OWASP LLM10 — the Month 1 resource-group budget, subscription spending limit,
+and application-level token budgets are complementary safeguards). These
+controls are also Month 3's durable-execution foundation.
 
 ## Prerequisites
 Lesson 2 tool contract in place.

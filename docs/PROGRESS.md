@@ -10,7 +10,7 @@ One row per lesson. **Status values:** `not started` · `in progress` · `assist
 
 | ✓ | Day | Lesson | Status |
 |---|---|---|---|
-| ☐ | 1 | Toolchain, repo, and the $200 budget | not started |
+| ☐ | 1 | Toolchain, repo, and the budget | in progress |
 | ☐ | 2 | Bicep core I — storage, secrets, monitoring with caps | not started |
 | ☐ | 3 | Bicep core II — Azure OpenAI + AI Search Free | not started |
 | ☐ | 4 | Keyless access — managed identity + RBAC | not started |
@@ -198,6 +198,68 @@ One entry per status change. Format:
 - Confidence calibration: <stated % vs outcome, where notable>
 - Notes: <error class of any failure; repair-probe due date if assisted>
 ```
+
+### Month 1 / Day 1 — in progress — 2026-11-03
+
+- Checkpoint: all six toolchain version commands passed: Azure CLI 2.91.0,
+  Docker CLI 29.1.3, Python 3.14.4, Node 22.22.1, Git 2.53.0, GitHub CLI
+  2.46.0. Python and Node satisfy the lesson minimums.
+- Implementation: agent-created scaffold at the existing project repository root
+  with `app/`, `infra/`, `ingestion/`, `evals/`, `data/`, secret-file exclusions,
+  and a README with a resource table and Azure configuration.
+- Workflow correction: moved the initial sibling scaffold into this repository
+  per the learner's preference. Week 1, including Day 1, uses local
+  `month1_week1`, tracking the existing `origin/month1_week1`; documentation
+  and implementation stay together. No push was performed during setup.
+- Verification: all five directory placeholders
+  exist. `git check-ignore` confirms environment files, local settings, Python
+  caches, and Node dependencies are excluded while `.env.example` is allowed.
+  `git diff --check` passed for the course tracker change.
+- Azure checkpoint: learner completed interactive sign-in. Agent verified
+  `az account show` identifies the expected Visual Studio Enterprise Subscription
+  as enabled and default. `az account get-access-token` for Azure management
+  succeeded; only token expiry was displayed, not the token.
+- Credit checkpoint: after learner browser sign-in, agent inspected the
+  subscription overview. Offer: MSDN (`MS-AZR-0063P`); currency: INR.
+  Starting credit is displayed as INR 12.50K (rounded); the status banner shows
+  INR 12,479.94 remaining. Current billing period: 2026-10-10 through 2026-11-09.
+  The next cycle is expected on 2026-11-10, inferred from the period end;
+  an explicit reset timestamp was not shown.
+- Cost controls: the portal offers to remove the spending limit; it was left
+  unchanged. Existing subscription resources and usage were observed and left
+  untouched. The project budget is set in INR with headroom for subscription-wide
+  existing usage; the original $200 credit assumption was not used.
+- Resource group: created `rg-agentops-dev` in Central India. Verified
+  provisioning state `Succeeded` and zero resources in the new group.
+- Budget: created `agentops-monthly-inr`, INR 10,000, calendar monthly,
+  2026-11-01 through 2027-10-31. Azure API read-back verified six enabled
+  notifications to the signed-in account: actual and forecast thresholds
+  50%, 80%, and 100%. Budget alerts do not cap spending. The budget's calendar
+  period is not aligned with the subscription's 10th-to-9th billing period.
+- Repository checkpoint: use `git status` and `git log` to verify the local
+  commit; a persistent Git author identity was not configured during setup.
+  The tutorial app worked; its temporary resource group has been deleted and
+  confirmed absent. No application or billable resources were created in the
+  project group; existing subscription resources were not modified.
+- Tutorial preflight: installed Azure CLI `containerapp` extension 1.3.0b5
+  (preview). Docker daemon access returned permission denied; Azure CLI help
+  documents an Oryx fallback for `az containerapp up --source`. Cloned the
+  official FastAPI sample to `/tmp/agentops-fastapi-tutorial` at revision
+  `2ecc964` and added the tutorial Dockerfile and `.dockerignore` there.
+  Deployment was initially pending approval because it creates a public app and
+  chargeable temporary resources; approval has now been given. The group is
+  separate from `rg-agentops-dev`, and the cleanup command is
+  `az group delete --name web-fastapi-aca-rg --yes --no-wait`.
+- Tutorial run: deployed the sample as `web-aca-app` in Central India. The
+  first request exposed a dependency/API mismatch: current unpinned FastAPI
+  dependencies use Starlette 1.10, while the sample used the older positional
+  `TemplateResponse` call. Updated the temporary sample to the request/name/
+  context signature, rebuilt, and verified the home page and form response
+  (`Hello AgentOps`) both return HTTP 200. Azure confirmed deletion of the
+  Container Apps environment and resource group; the temporary local sample
+  clone was also removed.
+- Assessment: not requested; no baseline, quiz, or unaided mastery claimed.
+- Notes: agent-written factual work summary, not a learner reflection.
 
 ## Standing routines (evidence lives here too)
 

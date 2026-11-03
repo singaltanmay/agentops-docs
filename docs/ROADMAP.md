@@ -1,8 +1,11 @@
 # Roadmap — The Full 6-Month Trajectory
 
 One system, four phases, then the interview phase. Start: late Oct 2026 →
-late Apr 2027. Everything is Azure, everything fits the $200/month credit budget,
-everything is measured. Sequence is prerequisite order, not calendar order —
+late Apr 2027. Everything is Azure; monthly deployment spend must fit the
+subscription's verified credit allowance. The original cost estimates are in USD,
+while this learner's current Visual Studio billing period started with about
+INR 12,500 in credit.
+Everything is measured. Sequence is prerequisite order, not calendar order —
 month boundaries below are the plan's shape, [PROGRESS.md](PROGRESS.md) is the truth.
 
 ## Target roles (why this trajectory)
@@ -97,7 +100,13 @@ gap list; applications submitted; negotiation anchored to level, not just comp.
 | Apps | Container Apps (Consumption), scale-to-zero | FastAPI API, Next.js UI, MCP server (Month 3), ingestion Jobs |
 | Secrets / observability | Key Vault + managed identity; App Insights + Log Analytics (capped) | Keyless where supported; daily log cap is mandatory |
 
-## Monthly budget (all < $200)
+## Original monthly cost model (USD)
+
+The estimates below are in USD and fit the course's original $200/month model.
+This learner's current Visual Studio billing period started with about INR 12,500
+in credit, so these estimates are not automatically affordable under the current
+subscription. Recalculate and trim paid-service scope before deploying each
+month's resources.
 
 | Line | M1 | M2 | M3 | M4 | M5 | M6 |
 |---|---:|---:|---:|---:|---:|---:|

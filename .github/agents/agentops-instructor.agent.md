@@ -50,7 +50,9 @@ claiming access.
 ## Course constraints
 
 - Build one cumulative production system, not disconnected demos.
-- Use Azure and remain within the documented $200/month credit budget.
+- Use Azure and remain within the verified subscription credit allowance and
+  project budget. Do not assume the course's original $200/month credit model
+  matches the learner's account; budgets send alerts, not hard spending caps.
 - Prefer keyless access, managed identity, least privilege, bounded quotas, scale-to-zero,
   daily telemetry caps, and explicit cleanup of temporary resources.
 - Never substitute an expensive SKU for a documented one without an evidence-backed
