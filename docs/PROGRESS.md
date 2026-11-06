@@ -6,11 +6,18 @@ One row per lesson. **Status values:** `not started` · `in progress` · `assist
 - `mastered` = independent verification passed **and** the unaided probe passed, on evidence — never on self-report (see [HOW-WE-LEARN.md](HOW-WE-LEARN.md)).
 - A status change without an evidence-log entry (below) does not count.
 
+## Current status — 2026-11-06
+
+- **Current lesson:** Month 1, Day 1 — Toolchain, repo, and the $200 budget. Status: `in progress`.
+- **Gate:** Day 1 Module 1 toolchain checkpoint (versions for `az`, `docker`, `python3`, `node`, `git`, `gh`) not yet reported. Modules 2+ stay queued until it lands — advancement is on evidence, not calendar.
+- **Timeline:** Course repo created 2026-11-02. Start deferred by the learner on 2026-10-31 to Mon 2026-11-02 (no catch-up debt; lessons are sequence numbers, not calendar dates). Day 1 session delivered 2026-11-02; daily pushes since have held at Module 1.
+- **Everything else:** Days 2–31 and Months 2–6 all `not started`. Azure spend so far: $0 (nothing deployed yet).
+
 ## Month 1 — Production RAG (Days 1–31)
 
 | ✓ | Day | Lesson | Status |
 |---|---|---|---|
-| ☐ | 1 | Toolchain, repo, and the $200 budget | not started |
+| ☐ | 1 | Toolchain, repo, and the $200 budget | in progress — gated on Module 1 toolchain checkpoint |
 | ☐ | 2 | Bicep core I — storage, secrets, monitoring with caps | not started |
 | ☐ | 3 | Bicep core II — Azure OpenAI + AI Search Free | not started |
 | ☐ | 4 | Keyless access — managed identity + RBAC | not started |
@@ -188,6 +195,11 @@ One row per lesson. **Status values:** `not started` · `in progress` · `assist
 | W4·L6 | Deep build — negotiation prep + the course retrospective | not started |
 
 ## Evidence log
+
+### Month 1 / Day 1 — in progress — 2026-11-06
+- Checkpoint: Day 1 session delivered 2026-11-02 (fresh restart after the learner deferred the start on 2026-10-31 to Monday 2026-11-02; no catch-up debt). Module 1 toolchain check (`az`, `docker`, `python3`, `node`, `git`, `gh` versions) issued with expected outputs — **not yet reported as of 2026-11-06**. No verification run, no probe attempted yet.
+- Probe: baseline diagnostic issued (closed-book: Container Apps deploy sequence, managed identity, Recall@k) — awaiting answers.
+- Notes: Status tracking lives in this repo per the learner's request (2026-11-06). Daily pushes hold at Day 1 Module 1 per the evidence-gated rule; nothing is marked done on self-report.
 
 One entry per status change. Format:
 
