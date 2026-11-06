@@ -38,9 +38,27 @@ Workspace retention **31 days**; set the **daily cap** explicitly (start at 1 GB
 **Expected output:** `az monitor log-analytics workspace show` shows your retention + cap values — not the defaults. If it shows defaults, the cap didn't deploy; that is today's bug to find.
 
 ### Step 4 — Deploy and record
-`az deployment group create --template-file infra/main.bicep`. Fill the README resource table: each resource, its SKU cap, its expected monthly cost.
+From the repository root, confirm the intended subscription with `az account show`,
+then run `az deployment group validate --resource-group rg-agentops-dev --name day02-core --template-file infra/main.bicep`
+and `az deployment group what-if --resource-group rg-agentops-dev --name day02-core --template-file infra/main.bicep`.
+Expect only the four core resources plus the Blob service/container, not unrelated
+changes. Deploy with
+`az deployment group create --resource-group rg-agentops-dev --name day02-core --template-file infra/main.bicep`.
+Fill the README resource table: each resource, its SKU cap, its expected monthly cost.
+Application Insights has no separate SKU: use a workspace-based component and
+record its linked workspace's billing controls rather than inventing a SKU.
 
 **Expected output:** Deployment state `Succeeded`. README table has 4+ rows with caps, not just names.
+
+The daily cap is not a guaranteed financial ceiling: ingestion can overshoot,
+and reaching it stops covered log collection until reset. Do not treat 1 GB/day
+as a target; at the public Central India rate checked on 2026-11-06, 31 billable
+GB would cost approximately INR 9,505.73 before allowances and taxes.
+See [Azure Monitor daily-cap guidance](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/daily-cap).
+The [implemented checkpoint and read-back commands](../../../README.md#day-2-infrastructure-checkpoint)
+record the actual deployment and assumptions. Managed-identity/RBAC client access
+arrives on Day 4; disabled storage shared keys and Application Insights local
+authentication are intentional, not access failures to bypass.
 
 ## Common failure modes
 

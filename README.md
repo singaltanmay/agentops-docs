@@ -49,6 +49,82 @@ balance.
 
 | Resource | SKU cap | Monthly cost |
 |---|---|---|
+| Blob Storage `stn6427cwl3zfzo`, private `corpus` container | StorageV2, Hot, Standard_LRS only | Empty: approximately INR 0; first storage tier approximately INR 1.90/GB-month, plus operations and transfer |
+| Key Vault `kv-n6427cwl3zfzo` | Standard only, RBAC authorization | Empty/unused: approximately INR 0; standard operations approximately INR 2.86/10,000 |
+| Log Analytics `log-agentops-dev-n6427cwl3zfzo` | PerGB2018 only, 31-day retention, 1 GB/day ingestion cap | No ingestion: approximately INR 0; approximately INR 306.64 per billable GB ingested |
+| Application Insights `appi-agentops-dev-n6427cwl3zfzo` | Workspace-based `web` component; no separate SKU | Logs billed through the linked workspace; do not count ingestion twice |
+
+These are illustrative Central India public retail consumption rates in INR,
+queried on 2026-11-06 from the [Azure Retail Prices API](https://prices.azure.com/api/retail/prices).
+They are not a subscription-specific quote or guaranteed monthly maximum.
+Allowances, subscription-wide usage, taxes, operations, transfer, and other meters
+can change the bill. The project currently has no corpus or telemetry workload.
+At 31 billable GB/month, ingestion alone would be approximately INR 9,505.73
+before allowances and tax, almost the entire project budget.
+
+The [daily cap](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/daily-cap)
+is an emergency safeguard: it can overshoot, and reaching it stops covered log
+collection until the workspace resets. It is not a hard financial cap. Control
+telemetry volume and add application-side sampling when telemetry is wired.
+
+## Day 2 infrastructure checkpoint
+
+Completed with agent assistance on 2026-11-06; unaided mastery was not assessed.
+Deployment `day02-core` succeeded in `rg-agentops-dev`. All four resources are
+in Central India. Repeat deployment preview reports `NoChange` for all six
+resource entries, including the Blob service and container.
+
+The [Bicep entry point](infra/main.bicep) composes storage, Key Vault, and
+monitoring modules. Resource-group/environment-derived names are stable across
+redeployments. SKU allow-lists exist at both entry-point and module boundaries.
+Application Insights has no separate SKU parameter; its workspace controls log
+billing. The 31-day retention and 1 GB/day workspace cap are fixed in code.
+
+Storage requires HTTPS/TLS 1.2, disallows anonymous Blob and shared-key access,
+and creates a private `corpus` container. Key Vault uses RBAC with no legacy
+access policies or seeded secrets. Application Insights disables local
+authentication: telemetry clients will need Entra authentication and the
+appropriate role assignment. Storage/Key Vault data-plane role assignments
+and application managed identities arrive in Day 4; do not work around missing
+access by enabling keys or creating manual secrets.
+
+Run from the repository root, after confirming the intended Azure subscription:
+
+```bash
+az account show --query '{name:name,state:state,isDefault:isDefault}'
+az bicep build --file infra/main.bicep --stdout > /dev/null
+az bicep lint --file infra/main.bicep
+az deployment group validate --resource-group rg-agentops-dev \
+  --name day02-core --template-file infra/main.bicep
+az deployment group what-if --resource-group rg-agentops-dev \
+  --name day02-core --template-file infra/main.bicep
+# This command creates or updates billable project resources.
+az deployment group create --resource-group rg-agentops-dev \
+  --name day02-core --template-file infra/main.bicep
+```
+
+Independent read-back (expected deployment `Succeeded`, storage `Standard_LRS`
+and `Hot`, vault RBAC `true`, workspace retention `31` and daily cap `1`):
+
+```bash
+az deployment group show -g rg-agentops-dev -n day02-core \
+  --query properties.provisioningState
+az storage account show -g rg-agentops-dev -n stn6427cwl3zfzo \
+  --query '{sku:sku.name,tier:accessTier,publicBlobs:allowBlobPublicAccess,sharedKeys:allowSharedKeyAccess}'
+az keyvault show -g rg-agentops-dev -n kv-n6427cwl3zfzo \
+  --query '{sku:properties.sku.name,rbac:properties.enableRbacAuthorization}'
+az monitor log-analytics workspace show -g rg-agentops-dev \
+  -n log-agentops-dev-n6427cwl3zfzo \
+  --query '{sku:sku.name,retention:retentionInDays,dailyCapGb:workspaceCapping.dailyQuotaGb,id:id}'
+az resource show -g rg-agentops-dev \
+  --resource-type Microsoft.Insights/components \
+  -n appi-agentops-dev-n6427cwl3zfzo --api-version 2020-02-02 \
+  --query '{workspace:properties.WorkspaceResourceId,disableLocalAuth:properties.DisableLocalAuth}'
+```
+
+The returned Application Insights workspace ID must equal the workspace's ID.
+Names above describe this deployment; use deployment outputs for another
+resource group or environment.
 
 ## Day 1 checkpoint
 

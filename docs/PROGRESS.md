@@ -10,8 +10,8 @@ One row per lesson. **Status values:** `not started` · `in progress` · `assist
 
 | ✓ | Day | Lesson | Status |
 |---|---|---|---|
-| ☐ | 1 | Toolchain, repo, and the budget | in progress |
-| ☐ | 2 | Bicep core I — storage, secrets, monitoring with caps | not started |
+| ☑ | 1 | Toolchain, repo, and the budget | assisted |
+| ☑ | 2 | Bicep core I — storage, secrets, monitoring with caps | assisted |
 | ☐ | 3 | Bicep core II — Azure OpenAI + AI Search Free | not started |
 | ☐ | 4 | Keyless access — managed identity + RBAC | not started |
 | ☐ | 5 | Walking skeleton — live completion from a container | not started |
@@ -198,6 +198,68 @@ One entry per status change. Format:
 - Confidence calibration: <stated % vs outcome, where notable>
 - Notes: <error class of any failure; repair-probe due date if assisted>
 ```
+
+### Month 1 / Day 2 — assisted — 2026-11-06
+
+- Built: `infra/main.bicep` and three modules for Hot LRS Blob Storage with a
+  private `corpus` container, Standard RBAC Key Vault, and Log Analytics plus
+  workspace-based Application Insights. No secrets, data-plane role assignments,
+  application workload, or telemetry clients were created.
+- Tooling: prerequisite compile failed because Bicep CLI was missing. Installed
+  Bicep 0.48.1 via `az bicep install`; build and lint then passed without warnings.
+  Inspected the official Azure Search OpenAI demo's infrastructure layout via
+  the public GitHub API after `gh api` reported no local GitHub authentication.
+- Verification: Azure template validation returned `Succeeded`; initial what-if
+  listed only the intended resources. Deployment `day02-core` returned
+  `Succeeded`. A separate read-back passed 17 checks: deployment state, exactly
+  four top-level resources, Central India location, storage SKU/tier,
+  disabled anonymous/shared-key access, HTTPS/TLS, private container, vault SKU
+  and RBAC, workspace SKU, exactly 31-day retention and 1 GB/day quota, workspace
+  linkage, Entra-only telemetry authentication, preserved monthly budget and
+  six alerts, and continued absence of the tutorial group.
+- Negative tests: Azure validation rejected `storageSku=Standard_GRS`,
+  `keyVaultSku=premium`, and `logAnalyticsSku=CapacityReservation` because of
+  allowed-value constraints. No negative-test deployment was created.
+- Repeatability: initial post-deploy what-if exposed provider-default noise.
+  Made Blob service/container and Application Insights defaults explicit,
+  recompiled/linted and redeployed successfully. Final what-if returned
+  `NoChange` for all six entries (four resources plus Blob service/container).
+- Cost evidence: public Central India retail rates were queried in INR.
+  Billable log ingestion is approximately INR 306.64/GB; 31 billable GB would
+  cost approximately INR 9,505.73 before allowances/tax. The daily cap can
+  overshoot and stops covered collection, not all spending. No usage workload
+  was started. README records resource estimates and reproducible commands.
+- Sources: official pinned API references for Storage 2023-05-01, Key Vault
+  2023-07-01, Log Analytics 2023-09-01, and Application Insights 2020-02-02;
+  Azure Monitor daily-cap guidance, Key Vault RBAC guidance, and Blob anonymous
+  access guidance. Live Azure read-back independently checked deployed settings.
+- Assessment: not requested. Recorded as `assisted`, not `mastered`, under
+  the guided-reading preference in HOW-WE-LEARN.md. No learner reflection or
+  unaided competence is claimed; an optional repair probe was not scheduled.
+- Git checkpoint: `git diff --check` and local documentation link checks passed.
+  The initial commit was blocked because no author name/email is configured.
+  On the learner's subsequent push request, SSH access was verified; the identity
+  from the two latest commits was selected for per-command Git settings without
+  changing repository or global configuration. Use `git log` and `git status`
+  to confirm the final commit and remote synchronization.
+- Next: Day 3, Azure OpenAI and AI Search Free. Existing subscription resources
+  outside the project group were left untouched.
+
+### Month 1 / Day 1 — assisted — 2026-11-06
+
+- Reverification: expected Visual Studio Enterprise Subscription remains
+  enabled/default; project group is in Central India and was empty before
+  Day 2. Monthly INR 10,000 budget and all six enabled actual/forecast
+  notifications remain configured. Tutorial resource group remains absent.
+- Local checkpoint: `month1_week1` tracks `origin/month1_week1`; scaffold commit
+  `844df0c` exists, and the working tree was clean at session start. Rechecked
+  Azure CLI, Docker CLI, Python, Node, Git, and GitHub CLI versions.
+- Prior evidence: the 2026-11-03 entry below records the successful sample
+  deployment, HTTP checks, and completed cleanup; it was not redeployed.
+- Assessment: not requested. Guided progression does not require a quiz or
+  learner reflection; Day 1 is technically complete with assistance, not mastered.
+  The Docker daemon limitation remains; no local Docker build is claimed.
+  Subscription credit balance was not refreshed in this session.
 
 ### Month 1 / Day 1 — in progress — 2026-11-03
 
